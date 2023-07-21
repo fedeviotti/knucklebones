@@ -1,43 +1,46 @@
 import * as React from "react";
 import Head from "next/head";
-import {Box} from "@chakra-ui/react";
-import {GameForm, type GameFormValues} from "~/features/game/GameForm";
-import {GameDashboard} from "~/features/game/GameDashboard";
+import { Box } from "@chakra-ui/react";
+import { GameForm, type GameFormValues } from "~/features/game/GameForm";
+import { GameDashboard } from "~/features/game/GameDashboard";
 
 export interface Player {
-    name: string;
-    values: number[];
+  name: string;
+  values: number[];
 }
 
 export interface Players {
-    playerOne: Player;
-    playerTwo: Player;
+  playerOne: Player;
+  playerTwo: Player;
 }
 
-export default function Home() {
+const Home = () => {
   const [players, setPlayers] = React.useState<Players>();
 
   const onSubmitHandler = (values: GameFormValues) => {
     setPlayers(() => ({
-        playerOne: {
-            name: values.playerOne,
-            values: Array.from({length: 9}, () => 0)
-        },
-        playerTwo: {
-            name: values.playerTwo,
-            values: Array.from({length: 9}, () => 0)
-        }
-    }))
-  }
+      playerOne: {
+        name: values.playerOne,
+        values: Array.from({ length: 9 }, () => 0),
+      },
+      playerTwo: {
+        name: values.playerTwo,
+        values: Array.from({ length: 9 }, () => 0),
+      },
+    }));
+  };
 
   const getContent = () => {
-      if (players) {
-          return <GameDashboard onQuit={() => setPlayers(undefined)} players={players} />
-      }
-      return <GameForm
-          initialValues={{playerOne: "Teo", playerTwo: "Noa"}}
-          onSubmit={(values) => onSubmitHandler(values)} />
-  }
+    if (players) {
+      return <GameDashboard onQuit={() => setPlayers(undefined)} players={players} />;
+    }
+    return (
+      <GameForm
+        initialValues={{ playerOne: "Teo", playerTwo: "Noa" }}
+        onSubmit={(values) => onSubmitHandler(values)}
+      />
+    );
+  };
 
   return (
     <>
@@ -47,8 +50,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Box m={8}>
-          {getContent()}
+        {getContent()}
       </Box>
     </>
   );
-}
+};
+
+export default Home;
