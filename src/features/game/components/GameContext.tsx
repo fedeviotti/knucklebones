@@ -86,11 +86,13 @@ function gameReducer(state: State, action: Action) {
             return {
               ...player,
               values: calculatedPlayerValues,
+              valueToPlace: 0,
             };
           }
           return {
             ...player,
             values: calculatedOpponentValues,
+            valueToPlace: 0,
           };
         }),
       };
