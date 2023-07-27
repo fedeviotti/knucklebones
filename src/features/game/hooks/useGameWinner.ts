@@ -5,18 +5,15 @@ import { useGameOver } from "~/features/game/hooks/useGameOver";
 export const useGameWinner = () => {
   const { state: { players } } = useGame();
   const { isGameOver } = useGameOver();
-  const playerScore = usePlayerTotalScore({ playerNumber: 0 });
-  const opponentScore = usePlayerTotalScore({ playerNumber: 1 });
+  const playerScore = usePlayerTotalScore({ playerOrder: "player" });
+  const opponentScore = usePlayerTotalScore({ playerOrder: "opponent" });
+  const winnerOrder = playerScore > opponentScore ? "player" : "opponent";
 
   if (isGameOver) {
     return {
-      winnerName: (playerScore > opponentScore ? players[0]?.name : players[1]?.name) || "Player",
-      score: playerScore > opponentScore
-        ? playerScore
-        : opponentScore,
-      delta: playerScore > opponentScore
-        ? playerScore - opponentScore
-        : opponentScore - playerScore,
+      winnerName: players.find((p) => p.order === winnerOrder)?.name || "Player",
+      score: Math.max(playerScore, opponentScore),
+      delta: Math.abs(playerScore - opponentScore),
     };
   }
 
