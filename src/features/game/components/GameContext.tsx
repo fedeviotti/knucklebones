@@ -1,5 +1,5 @@
 import * as React from "react";
-import type { Player, PlayerNumber } from "~/features/game/types";
+import type { Player, PlayerOrder } from "~/features/game/types";
 import type { GameFormValues } from "~/features/game/components/GameForm";
 import { cloneDeep } from "lodash";
 
@@ -9,10 +9,9 @@ type Action =
     { type: "addRound" } |
     { type: "quitGame" } |
     { type: "rollDie";
-      payload: { playerNumber: PlayerNumber }; } |
+      payload: { playerOrder: PlayerOrder }; } |
     { type: "placeDie";
       payload: {
-        playerNumber: PlayerNumber;
         calculatedPlayerValues: number[];
         calculatedOpponentValues: number[];
       };
@@ -42,12 +41,14 @@ function gameReducer(state: State, action: Action) {
             name: action.payload.playerOne,
             // values: [2, 2, 2, 2, 2, 2, 2, 2, 0],
             values: Array(9).fill(0),
+            order: "player" as PlayerOrder,
             valueToPlace: 0,
           },
           {
             name: action.payload.playerTwo,
             // values: [3, 3, 3, 3, 3, 3, 3, 3, 0],
             values: Array(9).fill(0),
+            order: "opponent" as PlayerOrder,
             valueToPlace: 0,
           },
         ],
@@ -62,40 +63,36 @@ function gameReducer(state: State, action: Action) {
     }
     case "rollDie": {
       const newValue = Math.floor(Math.random() * 6) + 1;
-      // const newValue = 4;
-      const { playerNumber } = action.payload;
+      const { playerOrder } = action.payload;
       return {
         ...state,
-        players: state.players.map((player, index) => {
-          if (index === playerNumber) {
+        players: state.players.map((player) => {
+          if (player.order === playerOrder) {
             return { ...cloneDeep(player), valueToPlace: newValue };
           }
-          return player;
+          return { ...cloneDeep(player) };
         }),
       };
     }
     case "placeDie": {
       const {
-        playerNumber, calculatedPlayerValues, calculatedOpponentValues,
+        calculatedPlayerValues, calculatedOpponentValues,
       } = action.payload;
-      const opponentPlayerNumber: PlayerNumber = playerNumber === 0 ? 1 : 0;
-
-      const activePlayer = {
-        ...state.players[playerNumber] as Player,
-        values: calculatedPlayerValues,
-        valueToPlace: 0,
-      };
-
-      const opponentPlayer = {
-        ...state.players[opponentPlayerNumber] as Player,
-        values: calculatedOpponentValues,
-      };
 
       return {
         ...state,
-        players: playerNumber === 0
-          ? [activePlayer, opponentPlayer]
-          : [opponentPlayer, activePlayer],
+        players: state.players.map((player) => {
+          if (player.order === "player") {
+            return {
+              ...player,
+              values: calculatedPlayerValues,
+            };
+          }
+          return {
+            ...player,
+            values: calculatedOpponentValues,
+          };
+        }),
       };
     }
     default: {

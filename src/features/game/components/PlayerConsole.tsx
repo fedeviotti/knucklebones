@@ -15,7 +15,7 @@ export const PlayerConsole = ({
 }: Props) => {
   const { state: { players, round }, dispatch } = useGame();
   const totalScore = usePlayerTotalScore({ playerOrder });
-  const currentPlayer = React.useMemo(
+  const currentContender = React.useMemo(
     () => players.find((p) => p.order === playerOrder),
     [playerOrder, players],
   );
@@ -23,7 +23,7 @@ export const PlayerConsole = ({
 
   return (
     <Flex direction="column" width="400px" gap={2}>
-      <Heading>{currentPlayer?.name}</Heading>
+      <Heading>{currentContender?.name}</Heading>
       <Text fontWeight="bold">
         {`Total score: ${totalScore}`}
       </Text>
@@ -48,7 +48,7 @@ export const PlayerConsole = ({
           borderWidth="1px"
           borderRadius="lg"
         >
-          {(currentPlayer?.valueToPlace || 0) > 0 ? currentPlayer?.valueToPlace : "-"}
+          {(currentContender?.valueToPlace || 0) > 0 ? currentContender?.valueToPlace : "-"}
         </Flex>
       </HStack>
     </Flex>
