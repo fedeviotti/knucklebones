@@ -3,23 +3,23 @@ import React from "react";
 import { DiceBoard } from "~/features/game/components/DiceBoard";
 import { PartialScore } from "~/features/game/components/PartialScore";
 import { PlayerConsole } from "~/features/game/components/PlayerConsole";
-import type { PlayerNumber } from "~/features/game/types";
+import type { PlayerOrder } from "~/features/game/types";
 
 type Props = {
-  playerNumber: PlayerNumber;
+  playerOrder: PlayerOrder;
 };
 
 export const PlayerBoard = ({
-  playerNumber,
+  playerOrder,
 }: Props) => (
-  <Stack direction={playerNumber === 0 ? "row-reverse" : "row"} spacing={12} width="900px">
+  <Stack direction={playerOrder === "player" ? "row-reverse" : "row"} spacing={12} width="900px">
     <Box width="400px" />
-    <Flex direction={playerNumber === 0 ? "column-reverse" : "column"} width="300px">
-      <PartialScore playerNumber={playerNumber} />
-      <DiceBoard playerNumber={playerNumber} />
+    <Flex direction={playerOrder === "player" ? "column-reverse" : "column"} width="300px">
+      <PartialScore playerOrder={playerOrder} />
+      <DiceBoard playerOrder={playerOrder} />
     </Flex>
     <PlayerConsole
-      playerNumber={playerNumber}
+      playerOrder={playerOrder}
     />
   </Stack>
 );

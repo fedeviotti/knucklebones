@@ -1,13 +1,13 @@
 import { Flex } from "@chakra-ui/react";
 import { usePlayerPartialScore } from "~/features/game/hooks/usePlayerPartialScore";
-import type { PlayerNumber } from "~/features/game/types";
+import type { PlayerOrder } from "~/features/game/types";
 
 type Props = {
-  playerNumber: PlayerNumber;
+  playerOrder: PlayerOrder;
 };
 
-export const PartialScore = ({ playerNumber }: Props) => {
-  const { column1Score, column2Score, column3Score } = usePlayerPartialScore({ playerNumber });
+export const PartialScore = ({ playerOrder }: Props) => {
+  const { column1Score, column2Score, column3Score } = usePlayerPartialScore({ playerOrder });
 
   return (
     <Flex gap={4} px={8}>

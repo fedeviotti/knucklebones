@@ -1,14 +1,14 @@
 import { useGame } from "~/features/game/components/GameContext";
 import { calculatePartialScore } from "~/features/game/utils/calculatePartialScore";
-import type { PlayerNumber } from "~/features/game/types";
+import type { PlayerOrder } from "~/features/game/types";
 
 type Props = {
-  playerNumber: PlayerNumber;
+  playerOrder: PlayerOrder;
 };
 
-export const usePlayerPartialScore = ({ playerNumber }: Props) => {
+export const usePlayerPartialScore = ({ playerOrder }: Props) => {
   const { state: { players } } = useGame();
-  const values = players[playerNumber]?.values || [];
+  const values = players.find((p) => p.order === playerOrder)?.values || [];
 
   return calculatePartialScore({ values });
 };
