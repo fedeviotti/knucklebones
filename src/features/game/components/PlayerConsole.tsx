@@ -34,7 +34,7 @@ export const PlayerConsole = ({
         }
         colorScheme="primary"
         alignSelf="start"
-        // onClick={() => dispatch({ type: "rollDie", payload: { playerNumber } })}
+        onClick={() => dispatch({ type: "rollDie", payload: { playerOrder } })}
       >
         Roll the dice
       </Button>
