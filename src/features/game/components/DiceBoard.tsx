@@ -55,7 +55,18 @@ export const DiceBoard = ({ playerOrder }: Props) => {
         opponentScore: calculatedOpponentScore,
       });
     }
-  }, [addMove, dispatch, gameId, players]);
+  }, [
+    addMove,
+    calculateOpponentValuesFunction,
+    calculatePlayerValuesFunction,
+    currentContender?.valueToPlace,
+    dispatch,
+    gameId,
+    opponent?.name,
+    opponent?.values,
+    player?.name,
+    player?.values,
+  ]);
 
   return (
     <Flex justifyContent="center" alignItems="center" px={8}>
