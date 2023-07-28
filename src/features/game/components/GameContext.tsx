@@ -39,14 +39,14 @@ function gameReducer(state: State, action: Action) {
         players: [
           {
             name: action.payload.playerOne,
-            // values: [2, 2, 2, 2, 2, 2, 2, 2, 0],
+            // values: [1, 1, 2, 2, 2, 2, 0, 0, 0],
             values: Array(9).fill(0),
             order: "player" as PlayerOrder,
             valueToPlace: 0,
           },
           {
             name: action.payload.playerTwo,
-            // values: [3, 3, 3, 3, 3, 3, 3, 3, 0],
+            // values: [6, 6, 6, 6, 6, 6, 0, 0, 0],
             values: Array(9).fill(0),
             order: "opponent" as PlayerOrder,
             valueToPlace: 0,
