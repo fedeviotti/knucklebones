@@ -12,6 +12,8 @@ const History = () => {
   const { query: { playerName }, back } = useRouter();
   const getGames = api.game.getGamesByPlayer.useQuery({
     playerName: playerName as string,
+  }, {
+    enabled: !!playerName,
   });
 
   const calculateGameScore = (delta: number, winner: string) => {
