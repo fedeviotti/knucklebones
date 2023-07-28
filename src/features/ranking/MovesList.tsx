@@ -28,7 +28,7 @@ export const MovesList = ({ gameId }: Props) => {
 
   if (getMoves.isLoading) {
     return (
-      <Stack>
+      <Stack spacing={2}>
         <Skeleton height="24px" />
         <Skeleton height="24px" />
         <Skeleton height="24px" />
