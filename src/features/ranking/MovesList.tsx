@@ -22,9 +22,8 @@ const MoveDetailBlock = ({ name, values, score }: MoveDetailBlockProps) => (
 
 type Props = {
   gameId: string;
-  playerName: string;
 };
-export const MovesList = ({ gameId, playerName }: Props) => {
+export const MovesList = ({ gameId }: Props) => {
   const getMoves = api.game.getMovesByGame.useQuery({ gameId });
 
   if (getMoves.isLoading) {
@@ -42,7 +41,7 @@ export const MovesList = ({ gameId, playerName }: Props) => {
       {getMoves.data?.map(({
         id, player, opponent, playerValues, opponentValues, playerScore, opponentScore,
       }) => (
-        <Flex key={id} direction={playerName === player ? "row" : "row-reverse"} justifyContent="center">
+        <Flex key={id} direction="row" justifyContent="center">
           <MoveDetailBlock name={player} values={playerValues} score={playerScore} />
           <Text pr={8}>{" - "}</Text>
           <MoveDetailBlock name={opponent} values={opponentValues} score={opponentScore} />
