@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`calculatePartialScore should return the correct partial score 1`] = `
+{
+  "column1Score": 9,
+  "column2Score": 18,
+  "column3Score": 27,
+}
+`;
