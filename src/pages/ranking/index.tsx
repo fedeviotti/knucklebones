@@ -10,9 +10,10 @@ import { TotalScore } from "~/features/ranking/TotalScore";
 
 const Ranking = () => {
   const getRanking = api.game.getRanking.useQuery();
+  const getNotWinnerRankingRaw = api.game.getNotWinnerRankingRaw.useQuery();
 
   const getContent = () => {
-    if (getRanking.isLoading) {
+    if (getRanking.isLoading || getNotWinnerRankingRaw.isLoading) {
       return (
         <Stack>
           <Skeleton height="53px" />
@@ -33,20 +34,30 @@ const Ranking = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {getRanking.data?.map(({ winner, _sum }, index) => (
-              <Tr key={crypto.randomUUID()}>
-                <Td>{`# ${index + 1}`}</Td>
-                <Td>{winner}</Td>
-                <Td isNumeric>
-                  <TotalScore playerName={winner || ""} delta={_sum.delta || 0} />
-                </Td>
-                <Td textAlign="end">
-                  <NextLink href={`/ranking/history/${encodeURIComponent(winner!)}`}>
-                    History
-                  </NextLink>
-                </Td>
-              </Tr>
-            ))}
+            {
+                [
+                  ...getRanking.data || [],
+                  ...(getNotWinnerRankingRaw.data as [])?.map(({ winner }: { winner: string }) => ({
+                    _sum: {
+                      delta: 0,
+                    },
+                    winner,
+                  })) || [],
+                ]?.map(({ winner, _sum }, index) => (
+                  <Tr key={crypto.randomUUID()}>
+                    <Td>{`# ${index + 1}`}</Td>
+                    <Td>{winner}</Td>
+                    <Td isNumeric>
+                      <TotalScore playerName={winner || ""} delta={_sum.delta || 0} />
+                    </Td>
+                    <Td textAlign="end">
+                      <NextLink href={`/ranking/history/${encodeURIComponent(winner!)}`}>
+                        History
+                      </NextLink>
+                    </Td>
+                  </Tr>
+                ))
+}
           </Tbody>
         </Table>
       </TableContainer>
