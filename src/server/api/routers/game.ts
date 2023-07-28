@@ -54,11 +54,15 @@ export const gameRouter = createTRPCRouter({
     })),
   getNotWinnerRankingRaw: publicProcedure
     .query(({ ctx }) => ctx.prisma.$queryRaw`
-    SELECT player as "winner" from "Game" 
+    select winner from (
+    SELECT player as "winner", "createdAt"
+    from "Game"
     where player not in (select distinct winner from "Game" where winner is not null) AND winner is not null
     UNION
-    SELECT opponent as "winner" from "Game" 
-    where opponent not in (select distinct winner from "Game" where winner is not null) and winner is not null`),
+    SELECT opponent as "winner", "createdAt"
+    from "Game"
+    where opponent not in (select distinct winner from "Game" where winner is not null) and winner is not null) as main
+    order by "createdAt" asc`),
   getGamesByPlayer: publicProcedure
     .input(z.object({
       playerName: z.string(),
