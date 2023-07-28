@@ -1,6 +1,6 @@
 import {
   Heading, Stack, Table, TableContainer, Tbody, Td, Th, Thead, Tr,
-  Skeleton,
+  Skeleton, Box,
 } from "@chakra-ui/react";
 import * as React from "react";
 import Head from "next/head";
@@ -16,6 +16,8 @@ const Ranking = () => {
     if (getRanking.isLoading || getNotWinnerRankingRaw.isLoading) {
       return (
         <Stack spacing={4}>
+          <Skeleton height="53px" />
+          <Skeleton height="53px" />
           <Skeleton height="53px" />
           <Skeleton height="53px" />
           <Skeleton height="53px" />
@@ -73,7 +75,9 @@ const Ranking = () => {
       </Head>
       <Stack spacing={16}>
         <Heading alignSelf="center">Ranking</Heading>
-        {getContent()}
+        <Box px={4} borderWidth="1px" borderRadius="lg" alignItems="center" bg="gray.50">
+          {getContent()}
+        </Box>
       </Stack>
     </>
   );
