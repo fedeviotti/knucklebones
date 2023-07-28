@@ -1,4 +1,4 @@
-import { Flex, Link } from "@chakra-ui/react";
+import { Box, Flex, Link } from "@chakra-ui/react";
 import ActiveLink from "~/components/ActiveLink";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
@@ -16,9 +16,15 @@ const Navbar = () => {
     }
     return (
       <>
-        <ActiveLink href="/">Play</ActiveLink>
-        <ActiveLink href="/how-to-play">How to play</ActiveLink>
-        <ActiveLink href="/ranking">Ranking</ActiveLink>
+        <ActiveLink href="/">
+          <Box minWidth="100px">Play</Box>
+        </ActiveLink>
+        <ActiveLink href="/how-to-play">
+          <Box minWidth="100px" textAlign="center">How to play</Box>
+        </ActiveLink>
+        <ActiveLink href="/ranking">
+          <Box minWidth="100px">Ranking</Box>
+        </ActiveLink>
       </>
     );
   };
