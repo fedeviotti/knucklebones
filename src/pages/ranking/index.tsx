@@ -15,7 +15,7 @@ const Ranking = () => {
   const getContent = () => {
     if (getRanking.isLoading || getNotWinnerRankingRaw.isLoading) {
       return (
-        <Stack spacing={4}>
+        <Stack spacing={4} py={4}>
           <Skeleton height="53px" />
           <Skeleton height="53px" />
           <Skeleton height="53px" />

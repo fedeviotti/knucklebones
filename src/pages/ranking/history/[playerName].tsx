@@ -27,13 +27,13 @@ const History = () => {
   const getContent = () => {
     if (getGames.isLoading) {
       return (
-        <>
+        <Stack spacing={12} px={4}>
           <Skeleton height="60px" />
           <Skeleton height="60px" />
           <Skeleton height="60px" />
           <Skeleton height="60px" />
           <Skeleton height="60px" />
-        </>
+        </Stack>
       );
     }
     return (
@@ -61,7 +61,7 @@ const History = () => {
         <Button onClick={back} alignSelf="center">Back to ranking</Button>
         <Heading alignSelf="center">{`${playerName}'s History`}</Heading>
         <Box>
-          <Box borderWidth="1px" borderRadius="lg" alignItems="center" bg="gray.50" overflow="auto">
+          <Box py={8} borderWidth="1px" borderRadius="lg" alignItems="center" bg="gray.50" overflow="auto">
             <Stack spacing={12}>
               {getContent()}
             </Stack>
