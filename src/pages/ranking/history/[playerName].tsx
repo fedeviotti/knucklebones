@@ -39,7 +39,7 @@ const History = () => {
           <Text fontSize="2xl">
             {`vs. ${player === playerName ? opponent : player}: +${calculateGameScore(delta || 0, winner || "")} pts.`}
           </Text>
-          <MovesList gameId={id} playerName={playerName as string} />
+          <MovesList gameId={id} />
         </Stack>
       ))
     );
