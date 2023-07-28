@@ -41,7 +41,7 @@ export const GameBoard = ({ onQuit }: Props) => {
   }, [delta, endGame, gameId, onClose, onQuit, score, winnerName]);
 
   return (
-    <Box pt={4} pb={8} px={4} borderWidth="1px" borderRadius="lg" alignItems="center" bg="gray.50">
+    <Box pt={4} pb={8} px={4} borderWidth="1px" borderRadius="lg" alignItems="center" bg="orange.50">
       <Stack direction="column" spacing={12}>
         <Button onClick={onQuit} alignSelf="start" colorScheme={isGameOver ? "primary" : "gray"}>Quit game</Button>
         <Stack direction="column" spacing={4} alignItems="center">

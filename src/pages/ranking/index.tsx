@@ -75,7 +75,7 @@ const Ranking = () => {
       </Head>
       <Stack spacing={16}>
         <Heading alignSelf="center">Ranking</Heading>
-        <Box px={4} borderWidth="1px" borderRadius="lg" alignItems="center" bg="gray.50">
+        <Box px={4} borderWidth="1px" borderRadius="lg" alignItems="center" bg="orange.50">
           {getContent()}
         </Box>
       </Stack>

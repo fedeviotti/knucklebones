@@ -10,7 +10,7 @@ type Props = {
 
 const Layout = ({ children }: Props) => (
   <Box
-    backgroundImage="url('https://images.unsplash.com/photo-1570303345338-e1f0eddf4946?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3471&q=80')"
+    backgroundImage="url('https://images.unsplash.com/photo-1570303363992-7f95ee20ebdb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2370&q=80')"
     backgroundPosition="cover"
     backgroundRepeat="no-repeat"
     backgroundSize="cover"

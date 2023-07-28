@@ -15,7 +15,7 @@ const HowToPlay = () => (
     </Head>
     <Stack spacing={16}>
       <Heading alignSelf="center">How to play</Heading>
-      <Flex p={4} borderWidth="1px" borderRadius="lg" alignItems="center" bg="gray.50">
+      <Flex p={4} borderWidth="1px" borderRadius="lg" alignItems="center" bg="orange.50">
         <List spacing={8}>
           <ListItem display="flex" alignItems="center">
             <ListIcon as={AiFillCaretRight} color="primary.200" />
