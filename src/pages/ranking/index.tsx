@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import {
   Heading, Stack, Table, TableContainer, Tbody, Td, Th, Thead, Tr,
   Skeleton, Box,
@@ -8,12 +9,68 @@ import { api } from "~/utils/api";
 import NextLink from "next/link";
 import { TotalScore } from "~/features/ranking/TotalScore";
 
+type RankingInfo = {
+  winner: string;
+  _sum: {
+    delta: number;
+  };
+};
+
+type NonWinnerInfo = {
+  winner: string;
+  delta: bigint;
+};
+
 const Ranking = () => {
-  const getRanking = api.game.getRanking.useQuery();
-  const getNotWinnerRankingRaw = api.game.getNotWinnerRankingRaw.useQuery();
+  const {
+    isLoading: isLoadingWinners,
+    data: winners,
+  } = api.game.getRanking.useQuery();
+  const {
+    isLoading: isLoadingNotWinners,
+    data: notWinners,
+  } = api.game.getNotWinnerRankingRaw.useQuery();
+
+  const fullRanking: RankingInfo[] = React.useMemo(
+    () => {
+      if (isLoadingWinners || isLoadingNotWinners) {
+        return [];
+      }
+      return ([
+        ...winners?.map((e) => ({
+          ...e,
+          _sum: {
+            delta: Number(e._sum.delta) + Number(e._count.winner),
+          },
+        })) as RankingInfo[],
+        ...(notWinners as NonWinnerInfo[])?.map(({ winner, delta }) => ({
+          _sum: {
+            delta: Number(delta),
+          },
+          winner,
+        })) as RankingInfo[],
+      ].reduce((acc, element) => {
+        const found = acc.find((e) => e.winner === element.winner);
+        if (found) {
+          return [
+            ...acc.filter((e) => e.winner !== element.winner),
+            {
+              winner: element.winner,
+              _sum: {
+                delta: found._sum.delta + (element._sum.delta || 0),
+              },
+            },
+          ];
+        }
+        return [...acc, element];
+      }, [] as RankingInfo[])
+        .sort((a, b) => b._sum.delta - a._sum.delta));
+    },
+    [isLoadingWinners, isLoadingNotWinners, winners, notWinners],
+  );
 
   const getContent = () => {
-    if (getRanking.isLoading || getNotWinnerRankingRaw.isLoading) {
+    if (isLoadingWinners || isLoadingNotWinners) {
       return (
         <Stack spacing={4} py={4}>
           <Skeleton height="53px" />
@@ -37,28 +94,20 @@ const Ranking = () => {
           </Thead>
           <Tbody>
             {
-                [
-                  ...getRanking.data || [],
-                  ...(getNotWinnerRankingRaw.data as [])?.map(({ winner }: { winner: string }) => ({
-                    _sum: {
-                      delta: 0,
-                    },
-                    winner,
-                  })) || [],
-                ]?.map(({ winner, _sum }, index) => (
-                  <Tr key={crypto.randomUUID()}>
-                    <Td>{`# ${index + 1}`}</Td>
-                    <Td>{winner}</Td>
-                    <Td isNumeric>
-                      <TotalScore playerName={winner} delta={_sum.delta} />
-                    </Td>
-                    <Td textAlign="end">
-                      <NextLink href={`/ranking/history/${encodeURIComponent(winner!)}`}>
-                        History
-                      </NextLink>
-                    </Td>
-                  </Tr>
-                ))
+              fullRanking.map(({ winner, _sum }, index) => (
+                <Tr key={crypto.randomUUID()}>
+                  <Td>{`# ${index + 1}`}</Td>
+                  <Td>{winner}</Td>
+                  <Td isNumeric>
+                    <TotalScore delta={_sum.delta} />
+                  </Td>
+                  <Td textAlign="end">
+                    <NextLink href={`/ranking/history/${encodeURIComponent(winner!)}`}>
+                      History
+                    </NextLink>
+                  </Td>
+                </Tr>
+              ))
 }
           </Tbody>
         </Table>
