@@ -57,7 +57,7 @@ export const gameRouter = createTRPCRouter({
   getNotWinnerRankingRaw: publicProcedure
     .query(({ ctx }) => ctx.prisma.$queryRaw`
     select distinct winner, count(*) as delta from(
-        select winner, "createdAt" from (
+        select winner from (
             SELECT player as "winner", "createdAt"
             from "Game"
             where player not in (select distinct winner from "Game" where winner is not null) AND winner is not null
