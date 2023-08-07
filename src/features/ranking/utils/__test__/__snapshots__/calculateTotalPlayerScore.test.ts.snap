@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`calculateTotalPlayerScore should return the correct total player score, when Teo loses all the games he played 1`] = `50`;
-
-exports[`calculateTotalPlayerScore should return the correct total player score, when Teo played 5 games with a total delta of 15 1`] = `200`;

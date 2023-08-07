@@ -7,7 +7,6 @@ import * as React from "react";
 import Head from "next/head";
 import { api } from "~/utils/api";
 import NextLink from "next/link";
-import { TotalScore } from "~/features/ranking/TotalScore";
 
 type RankingInfo = {
   winner: string;
@@ -99,7 +98,7 @@ const Ranking = () => {
                   <Td>{`# ${index + 1}`}</Td>
                   <Td>{winner}</Td>
                   <Td isNumeric>
-                    <TotalScore delta={_sum.delta} />
+                    {_sum.delta * 10}
                   </Td>
                   <Td textAlign="end">
                     <NextLink href={`/ranking/history/${encodeURIComponent(winner!)}`}>
