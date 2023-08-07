@@ -39,7 +39,7 @@ const Ranking = () => {
         ...winners?.map((e) => ({
           ...e,
           _sum: {
-            delta: Number(e._sum.delta) + Number(e._count.winner),
+            delta: (e._sum.delta || 0) + e._count.winner,
           },
         })) as RankingInfo[],
         ...(notWinners as NonWinnerInfo[])?.map(({ winner, delta }) => ({
