@@ -67,7 +67,7 @@ export const gameRouter = createTRPCRouter({
             where opponent not in (select distinct winner from "Game" where winner is not null) and winner is not null
             ) as main
         order by "createdAt" asc) 
-    as mainTwo group by winner order by count(*) desc`),
+    as mainTwo group by winner order by delta desc`),
   getGamesByPlayer: publicProcedure
     .input(z.object({
       playerName: z.string(),
