@@ -8,7 +8,7 @@ type Props = {
 
 export const usePlayerPartialScore = ({ playerOrder }: Props) => {
   const { state: { players } } = useGame();
-  const values = players.find((p) => p.order === playerOrder)?.values || [];
+  const values = players.find((p) => p.type === playerOrder)?.values || [];
 
   return calculatePartialScore({ values });
 };

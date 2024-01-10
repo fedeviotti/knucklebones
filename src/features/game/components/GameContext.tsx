@@ -67,7 +67,7 @@ function gameReducer(state: State, action: Action) {
       return {
         ...state,
         players: state.players.map((player) => {
-          if (player.order === playerOrder) {
+          if (player.type === playerOrder) {
             return { ...cloneDeep(player), valueToPlace: newValue };
           }
           return { ...cloneDeep(player) };
@@ -82,7 +82,7 @@ function gameReducer(state: State, action: Action) {
       return {
         ...state,
         players: state.players.map((player) => {
-          if (player.order === "player") {
+          if (player.type === "player") {
             return {
               ...player,
               values: calculatedPlayerValues,

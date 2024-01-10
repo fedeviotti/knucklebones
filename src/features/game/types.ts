@@ -1,7 +1,7 @@
 export type PlayerType = "player" | "opponent";
 export type Player = {
   name: string;
-  order: PlayerType;
+  type: PlayerType;
   values: number[];
   valueToPlace: number;
 };

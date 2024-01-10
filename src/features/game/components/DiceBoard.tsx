@@ -15,11 +15,11 @@ interface Props {
 export const DiceBoard = ({ playerOrder }: Props) => {
   const { state: { players, gameId }, dispatch } = useGame();
   const currentContender = React.useMemo(
-    () => players.find((p) => p.order === playerOrder),
+    () => players.find((p) => p.type === playerOrder),
     [playerOrder, players],
   );
-  const player = players.find((p) => p.order === "player");
-  const opponent = players.find((p) => p.order === "opponent");
+  const player = players.find((p) => p.type === "player");
+  const opponent = players.find((p) => p.type === "opponent");
   const calculatePlayerValuesFunction = playerOrder === "player" ? calculatePlayerUpdatedValues : calculateOpponentUpdatedValues;
   const calculateOpponentValuesFunction = playerOrder === "player" ? calculateOpponentUpdatedValues : calculatePlayerUpdatedValues;
   const addMove = api.game.addMove.useMutation();

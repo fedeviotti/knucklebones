@@ -18,7 +18,7 @@ export const PlayerConsole = ({
   const { state: { players, round }, dispatch } = useGame();
   const totalScore = usePlayerTotalScore({ playerOrder });
   const currentContender = React.useMemo(
-    () => players.find((p) => p.order === playerOrder),
+    () => players.find((p) => p.type === playerOrder),
     [playerOrder, players],
   );
   const remainder = playerOrder === "player" ? 1 : 0;

@@ -11,7 +11,7 @@ export const useGameWinner = () => {
 
   if (isGameOver) {
     return {
-      winnerName: players.find((p) => p.order === winnerOrder)?.name || "Player",
+      winnerName: players.find((p) => p.type === winnerOrder)?.name || "Player",
       score: Math.max(playerScore, opponentScore),
       delta: Math.abs(playerScore - opponentScore),
     };
