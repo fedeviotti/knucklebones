@@ -5,10 +5,10 @@ import React from "react";
 import { DiceBoard } from "~/features/game/components/DiceBoard";
 import { PartialScore } from "~/features/game/components/PartialScore";
 import { PlayerConsole } from "~/features/game/components/PlayerConsole";
-import type { PlayerOrder } from "~/features/game/types";
+import type { PlayerType } from "~/features/game/types";
 
 type Props = {
-  playerOrder: PlayerOrder;
+  playerOrder: PlayerType;
 };
 
 export const PlayerBoard = ({

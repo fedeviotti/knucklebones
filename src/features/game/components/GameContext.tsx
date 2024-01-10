@@ -1,5 +1,5 @@
 import * as React from "react";
-import type { Player, PlayerOrder } from "~/features/game/types";
+import type { Player, PlayerType } from "~/features/game/types";
 import type { GameFormValues } from "~/features/game/components/GameForm";
 import { cloneDeep } from "lodash";
 
@@ -9,7 +9,7 @@ type Action =
     { type: "addRound" } |
     { type: "quitGame" } |
     { type: "rollDie";
-      payload: { playerOrder: PlayerOrder }; } |
+      payload: { playerOrder: PlayerType }; } |
     { type: "placeDie";
       payload: {
         calculatedPlayerValues: number[];
@@ -41,14 +41,14 @@ function gameReducer(state: State, action: Action) {
             name: action.payload.playerOne,
             // values: [1, 1, 2, 2, 2, 2, 0, 0, 0],
             values: Array(9).fill(0),
-            order: "player" as PlayerOrder,
+            order: "player" as PlayerType,
             valueToPlace: 0,
           },
           {
             name: action.payload.playerTwo,
             // values: [6, 6, 6, 6, 6, 6, 0, 0, 0],
             values: Array(9).fill(0),
-            order: "opponent" as PlayerOrder,
+            order: "opponent" as PlayerType,
             valueToPlace: 0,
           },
         ],

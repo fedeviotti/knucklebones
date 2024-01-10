@@ -1,9 +1,9 @@
 import { Flex } from "@chakra-ui/react";
 import { usePlayerPartialScore } from "~/features/game/hooks/usePlayerPartialScore";
-import type { PlayerOrder } from "~/features/game/types";
+import type { PlayerType } from "~/features/game/types";
 
 type Props = {
-  playerOrder: PlayerOrder;
+  playerOrder: PlayerType;
 };
 
 export const PartialScore = ({ playerOrder }: Props) => {

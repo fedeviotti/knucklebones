@@ -6,10 +6,10 @@ import { api } from "~/utils/api";
 import { calculateTotalScore } from "~/features/game/utils/calculateTotalScore";
 import { calculatePlayerUpdatedValues } from "~/features/game/utils/calculatePlayerUpdatedValues";
 import { calculateOpponentUpdatedValues } from "~/features/game/utils/calculateOpponentUpdatedValues";
-import type { PlayerOrder } from "~/features/game/types";
+import type { PlayerType } from "~/features/game/types";
 
 interface Props {
-  playerOrder: PlayerOrder;
+  playerOrder: PlayerType;
 }
 
 export const DiceBoard = ({ playerOrder }: Props) => {

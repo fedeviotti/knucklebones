@@ -2,14 +2,14 @@ import {
   Button, Flex, Heading, HStack, Text,
 } from "@chakra-ui/react";
 import React from "react";
-import type { PlayerOrder } from "~/features/game/types";
+import type { PlayerType } from "~/features/game/types";
 import { useGame } from "~/features/game/components/GameContext";
 import { usePlayerTotalScore } from "~/features/game/hooks/usePlayerTotalScore";
 import { Die } from "~/features/game/components/Die";
 import { BsPlayFill } from "react-icons/bs";
 
 type Props = {
-  playerOrder: PlayerOrder;
+  playerOrder: PlayerType;
 };
 
 export const PlayerConsole = ({
