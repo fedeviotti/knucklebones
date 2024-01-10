@@ -1,14 +1,14 @@
 type CalculatePlayerUpdatedValuesProps = {
   values: number[];
-  valueToPlace: number;
+  valueToInsert: number;
   position: number;
 };
 export const calculatePlayerUpdatedValues = ({
   values,
-  valueToPlace,
+  valueToInsert,
   position,
 }: CalculatePlayerUpdatedValuesProps) => [
   ...values.slice(0, position),
-  valueToPlace,
+  valueToInsert,
   ...values.slice(position + 1),
 ];

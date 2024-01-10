@@ -3,5 +3,5 @@ export type Player = {
   name: string;
   type: PlayerType;
   values: number[];
-  valueToPlace: number;
+  valueToInsert: number;
 };

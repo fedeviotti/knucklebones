@@ -25,16 +25,16 @@ export const DiceBoard = ({ playerOrder }: Props) => {
   const addMove = api.game.addMove.useMutation();
 
   const onClickHandler = React.useCallback((position: number) => {
-    if (currentContender?.valueToPlace) {
+    if (currentContender?.valueToInsert) {
       const calculatedPlayerValues = calculatePlayerValuesFunction({
         values: player?.values || Array(9).fill(0),
-        valueToPlace: currentContender?.valueToPlace || 0,
+        valueToInsert: currentContender?.valueToInsert || 0,
         position,
       });
       const calculatedPlayerScore = calculateTotalScore({ values: calculatedPlayerValues });
       const calculatedOpponentValues = calculateOpponentValuesFunction({
         values: opponent?.values || Array(9).fill(0),
-        valueToPlace: currentContender?.valueToPlace || 0,
+        valueToInsert: currentContender?.valueToInsert || 0,
         position,
       });
       const calculatedOpponentScore = calculateTotalScore({ values: calculatedOpponentValues });
@@ -59,7 +59,7 @@ export const DiceBoard = ({ playerOrder }: Props) => {
     addMove,
     calculateOpponentValuesFunction,
     calculatePlayerValuesFunction,
-    currentContender?.valueToPlace,
+    currentContender?.valueToInsert,
     dispatch,
     gameId,
     opponent?.name,
@@ -76,7 +76,7 @@ export const DiceBoard = ({ playerOrder }: Props) => {
             key={crypto.randomUUID()}
             value={value}
             onClick={() => onClickHandler(index)}
-            isClickable={!!currentContender?.valueToPlace}
+            isClickable={!!currentContender?.valueToInsert}
           />
         ))}
       </SimpleGrid>

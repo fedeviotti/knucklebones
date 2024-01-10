@@ -22,6 +22,7 @@ export const PlayerConsole = ({
     [playerType, players],
   );
   const remainder = playerType === "player" ? 1 : 0;
+  const dieToInsert = currentContender?.valueToInsert || 0;
 
   return (
     <Flex direction="column" gap={2} minWidth={[null, "200px"]}>
@@ -33,6 +34,7 @@ export const PlayerConsole = ({
         rightIcon={<BsPlayFill />}
         isDisabled={
           round % 2 === remainder
+            || dieToInsert !== 0
             || players.some((player) => player.values.every((value) => value !== 0))
         }
         colorScheme="primary"
@@ -43,11 +45,7 @@ export const PlayerConsole = ({
       </Button>
       <HStack>
         <Text>Die to insert</Text>
-        <Die
-          value={(currentContender?.valueToPlace || 0) > 0
-            ? (currentContender?.valueToPlace || 0)
-            : 0}
-        />
+        <Die value={dieToInsert} />
       </HStack>
     </Flex>
   );

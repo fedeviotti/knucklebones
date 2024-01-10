@@ -42,14 +42,14 @@ function gameReducer(state: State, action: Action) {
             // values: [1, 1, 2, 2, 2, 2, 0, 0, 0],
             values: Array(9).fill(0),
             type: "player" as PlayerType,
-            valueToPlace: 0,
+            valueToInsert: 0,
           },
           {
             name: action.payload.playerTwo,
             // values: [6, 6, 6, 6, 6, 6, 0, 0, 0],
             values: Array(9).fill(0),
             type: "opponent" as PlayerType,
-            valueToPlace: 0,
+            valueToInsert: 0,
           },
         ],
         gameId: action.payload.gameId,
@@ -68,7 +68,7 @@ function gameReducer(state: State, action: Action) {
         ...state,
         players: state.players.map((player) => {
           if (player.type === playerType) {
-            return { ...cloneDeep(player), valueToPlace: newValue };
+            return { ...cloneDeep(player), valueToInsert: newValue };
           }
           return { ...cloneDeep(player) };
         }),
@@ -86,13 +86,13 @@ function gameReducer(state: State, action: Action) {
             return {
               ...player,
               values: calculatedPlayerValues,
-              valueToPlace: 0,
+              valueToInsert: 0,
             };
           }
           return {
             ...player,
             values: calculatedOpponentValues,
-            valueToPlace: 0,
+            valueToInsert: 0,
           };
         }),
       };
