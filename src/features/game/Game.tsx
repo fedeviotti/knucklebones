@@ -32,6 +32,7 @@ export const Game = () => {
     <GameForm
       initialValues={INITIAL_VALUES}
       onSubmit={(values) => onSubmitHandler(values)}
+      isSubmitting={startGame.status === "loading"}
     />
   );
 };
