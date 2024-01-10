@@ -24,7 +24,7 @@ export const Game = () => {
     });
   };
 
-  if (players.length === 2) {
+  if (players.length) {
     return <GameBoard onQuit={() => dispatch({ type: "quitGame" })} />;
   }
 
