@@ -7,7 +7,7 @@ describe("calculateSingleGameScore", () => {
       winner: "Teo",
       playerName: "Teo",
     });
-    expect(result).toMatchSnapshot();
+    expect(result).toBe(110);
   });
   it("should return the correct game score, when Teo lose a game", () => {
     const result = calculateSingleGameScore({
@@ -15,6 +15,6 @@ describe("calculateSingleGameScore", () => {
       winner: "Noa",
       playerName: "Teo",
     });
-    expect(result).toMatchSnapshot();
+    expect(result).toBe(10);
   });
 });

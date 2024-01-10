@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`calculateSingleGameScore should return the correct game score, when Teo lose a game 1`] = `10`;
-
-exports[`calculateSingleGameScore should return the correct game score, when Teo wins a game with a delta of 10 points 1`] = `110`;

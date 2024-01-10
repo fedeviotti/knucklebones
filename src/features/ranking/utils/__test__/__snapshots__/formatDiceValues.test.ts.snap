@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`formatDiceValues should return the values formatted properly 1`] = `"0,0,0|0,0,0|0,0,0"`;
