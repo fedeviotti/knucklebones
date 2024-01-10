@@ -17,16 +17,16 @@ export const PlayerConsole = ({
 }: Props) => {
   const { state: { players, round }, dispatch } = useGame();
   const totalScore = usePlayerTotalScore({ playerType });
-  const currentContender = React.useMemo(
+  const currentPlayer = React.useMemo(
     () => players.find((p) => p.type === playerType),
     [playerType, players],
   );
   const remainder = playerType === "player" ? 1 : 0;
-  const dieToInsert = currentContender?.valueToInsert || 0;
+  const dieToInsert = currentPlayer?.valueToInsert || 0;
 
   return (
     <Flex direction="column" gap={2} minWidth={[null, "200px"]}>
-      <Heading>{currentContender?.name}</Heading>
+      <Heading>{currentPlayer?.name}</Heading>
       <Text fontWeight="bold">
         {`Total score: ${totalScore}`}
       </Text>
