@@ -7,6 +7,6 @@ describe("calculatePlayerUpdatedValues", () => {
       valueToInsert: 1,
       position: 3,
     });
-    expect(result).toMatchSnapshot();
+    expect(result).toStrictEqual([1, 2, 3, 1, 0, 0, 1, 2, 3]);
   });
 });

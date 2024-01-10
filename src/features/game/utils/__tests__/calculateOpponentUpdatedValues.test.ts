@@ -7,6 +7,6 @@ describe("calculateOpponentUpdatedValues", () => {
       valueToInsert: 1,
       position: 3,
     });
-    expect(result).toMatchSnapshot();
+    expect(result).toStrictEqual([0, 2, 3, 0, 0, 0, 0, 2, 3]);
   });
 });
