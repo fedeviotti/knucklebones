@@ -3,12 +3,12 @@ import { calculatePartialScore } from "~/features/game/utils/calculatePartialSco
 import type { PlayerType } from "~/features/game/types";
 
 type Props = {
-  playerOrder: PlayerType;
+  playerType: PlayerType;
 };
 
-export const usePlayerPartialScore = ({ playerOrder }: Props) => {
+export const usePlayerPartialScore = ({ playerType }: Props) => {
   const { state: { players } } = useGame();
-  const values = players.find((p) => p.type === playerOrder)?.values || [];
+  const values = players.find((p) => p.type === playerType)?.values || [];
 
   return calculatePartialScore({ values });
 };

@@ -9,7 +9,7 @@ type Action =
     { type: "addRound" } |
     { type: "quitGame" } |
     { type: "rollDie";
-      payload: { playerOrder: PlayerType }; } |
+      payload: { playerType: PlayerType }; } |
     { type: "placeDie";
       payload: {
         calculatedPlayerValues: number[];
@@ -41,14 +41,14 @@ function gameReducer(state: State, action: Action) {
             name: action.payload.playerOne,
             // values: [1, 1, 2, 2, 2, 2, 0, 0, 0],
             values: Array(9).fill(0),
-            order: "player" as PlayerType,
+            type: "player" as PlayerType,
             valueToPlace: 0,
           },
           {
             name: action.payload.playerTwo,
             // values: [6, 6, 6, 6, 6, 6, 0, 0, 0],
             values: Array(9).fill(0),
-            order: "opponent" as PlayerType,
+            type: "opponent" as PlayerType,
             valueToPlace: 0,
           },
         ],
@@ -63,11 +63,11 @@ function gameReducer(state: State, action: Action) {
     }
     case "rollDie": {
       const newValue = Math.floor(Math.random() * 6) + 1;
-      const { playerOrder } = action.payload;
+      const { playerType } = action.payload;
       return {
         ...state,
         players: state.players.map((player) => {
-          if (player.type === playerOrder) {
+          if (player.type === playerType) {
             return { ...cloneDeep(player), valueToPlace: newValue };
           }
           return { ...cloneDeep(player) };

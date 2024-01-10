@@ -9,19 +9,19 @@ import { Die } from "~/features/game/components/Die";
 import { BsPlayFill } from "react-icons/bs";
 
 type Props = {
-  playerOrder: PlayerType;
+  playerType: PlayerType;
 };
 
 export const PlayerConsole = ({
-  playerOrder,
+  playerType,
 }: Props) => {
   const { state: { players, round }, dispatch } = useGame();
-  const totalScore = usePlayerTotalScore({ playerOrder });
+  const totalScore = usePlayerTotalScore({ playerType });
   const currentContender = React.useMemo(
-    () => players.find((p) => p.type === playerOrder),
-    [playerOrder, players],
+    () => players.find((p) => p.type === playerType),
+    [playerType, players],
   );
-  const remainder = playerOrder === "player" ? 1 : 0;
+  const remainder = playerType === "player" ? 1 : 0;
 
   return (
     <Flex direction="column" gap={2} minWidth={[null, "200px"]}>
@@ -37,7 +37,7 @@ export const PlayerConsole = ({
         }
         colorScheme="primary"
         alignSelf="start"
-        onClick={() => dispatch({ type: "rollDie", payload: { playerOrder } })}
+        onClick={() => dispatch({ type: "rollDie", payload: { playerType } })}
       >
         Roll the dice
       </Button>

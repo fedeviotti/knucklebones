@@ -23,7 +23,7 @@ export const PlayerBoard = ({
           <PartialScore playerOrder={playerOrder} />
           <DiceBoard playerOrder={playerOrder} />
         </Flex>
-        <PlayerConsole playerOrder={playerOrder} />
+        <PlayerConsole playerType={playerOrder} />
       </Stack>
     );
   }
@@ -39,7 +39,7 @@ export const PlayerBoard = ({
         <PartialScore playerOrder={playerOrder} />
         <DiceBoard playerOrder={playerOrder} />
       </Flex>
-      <PlayerConsole playerOrder={playerOrder} />
+      <PlayerConsole playerType={playerOrder} />
     </Stack>
   );
 };
