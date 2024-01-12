@@ -3,11 +3,11 @@ import { usePlayerPartialScore } from "~/features/game/hooks/usePlayerPartialSco
 import type { PlayerType } from "~/features/game/types";
 
 type Props = {
-  playerOrder: PlayerType;
+  playerType: PlayerType;
 };
 
-export const PartialScore = ({ playerOrder }: Props) => {
-  const { column1Score, column2Score, column3Score } = usePlayerPartialScore({ playerOrder });
+export const PartialScore = ({ playerType }: Props) => {
+  const { column1Score, column2Score, column3Score } = usePlayerPartialScore({ playerType });
 
   return (
     <Flex gap={4} px={8} grow={1} justifyContent="center">

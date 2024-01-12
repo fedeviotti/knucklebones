@@ -8,38 +8,38 @@ import { PlayerConsole } from "~/features/game/components/PlayerConsole";
 import type { PlayerType } from "~/features/game/types";
 
 type Props = {
-  playerOrder: PlayerType;
+  playerType: PlayerType;
 };
 
 export const PlayerBoard = ({
-  playerOrder,
+  playerType,
 }: Props) => {
   const [isDesktop] = useMediaQuery("(min-width: 768px)");
 
   if (!isDesktop) {
     return (
-      <Stack direction={playerOrder === "player" ? "column-reverse" : "column"} spacing={12} alignItems="center">
-        <Flex direction={playerOrder === "player" ? "column-reverse" : "column"} alignItems="center">
-          <PartialScore playerOrder={playerOrder} />
-          <DiceBoard playerOrder={playerOrder} />
+      <Stack direction={playerType === "player" ? "column-reverse" : "column"} spacing={12} alignItems="center">
+        <Flex direction={playerType === "player" ? "column-reverse" : "column"} alignItems="center">
+          <PartialScore playerType={playerType} />
+          <DiceBoard playerType={playerType} />
         </Flex>
-        <PlayerConsole playerType={playerOrder} />
+        <PlayerConsole playerType={playerType} />
       </Stack>
     );
   }
 
   return (
     <Stack
-      direction={playerOrder === "player" ? "row-reverse" : "row"}
+      direction={playerType === "player" ? "row-reverse" : "row"}
       spacing={12}
-      justifyContent={playerOrder === "player" ? "start" : "end"}
+      justifyContent={playerType === "player" ? "start" : "end"}
     >
       <Flex minWidth={[null, "200px"]} />
-      <Flex direction={playerOrder === "player" ? "column-reverse" : "column"} grow={1}>
-        <PartialScore playerOrder={playerOrder} />
-        <DiceBoard playerOrder={playerOrder} />
+      <Flex direction={playerType === "player" ? "column-reverse" : "column"} grow={1}>
+        <PartialScore playerType={playerType} />
+        <DiceBoard playerType={playerType} />
       </Flex>
-      <PlayerConsole playerType={playerOrder} />
+      <PlayerConsole playerType={playerType} />
     </Stack>
   );
 };

@@ -9,19 +9,19 @@ import { calculateOpponentUpdatedValues } from "~/features/game/utils/calculateO
 import type { PlayerType } from "~/features/game/types";
 
 interface Props {
-  playerOrder: PlayerType;
+  playerType: PlayerType;
 }
 
-export const DiceBoard = ({ playerOrder }: Props) => {
+export const DiceBoard = ({ playerType }: Props) => {
   const { state: { players, gameId }, dispatch } = useGame();
   const currentContender = React.useMemo(
-    () => players.find((p) => p.type === playerOrder),
-    [playerOrder, players],
+    () => players.find((p) => p.type === playerType),
+    [playerType, players],
   );
   const player = players.find((p) => p.type === "player");
   const opponent = players.find((p) => p.type === "opponent");
-  const calculatePlayerValuesFunction = playerOrder === "player" ? calculatePlayerUpdatedValues : calculateOpponentUpdatedValues;
-  const calculateOpponentValuesFunction = playerOrder === "player" ? calculateOpponentUpdatedValues : calculatePlayerUpdatedValues;
+  const calculatePlayerValuesFunction = playerType === "player" ? calculatePlayerUpdatedValues : calculateOpponentUpdatedValues;
+  const calculateOpponentValuesFunction = playerType === "player" ? calculateOpponentUpdatedValues : calculatePlayerUpdatedValues;
   const addMove = api.game.addMove.useMutation();
 
   const onClickHandler = React.useCallback((position: number) => {
