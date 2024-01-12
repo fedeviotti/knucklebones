@@ -5,8 +5,8 @@ import { useGameOver } from "~/features/game/hooks/useGameOver";
 export const useGameWinner = () => {
   const { state: { players } } = useGame();
   const { isGameOver } = useGameOver();
-  const playerScore = usePlayerTotalScore({ playerOrder: "player" });
-  const opponentScore = usePlayerTotalScore({ playerOrder: "opponent" });
+  const playerScore = usePlayerTotalScore({ playerType: "player" });
+  const opponentScore = usePlayerTotalScore({ playerType: "opponent" });
   const winnerOrder = playerScore > opponentScore ? "player" : "opponent";
 
   if (isGameOver) {
