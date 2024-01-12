@@ -53,9 +53,9 @@ export const GameBoard = ({ onQuit }: Props) => {
           Quit game
         </Button>
         <Stack direction="column" spacing={4}>
-          <PlayerBoard playerOrder="player" />
+          <PlayerBoard playerType="player" />
           <Divider />
-          <PlayerBoard playerOrder="opponent" />
+          <PlayerBoard playerType="opponent" />
         </Stack>
       </Stack>
       <AnimatePresence>
