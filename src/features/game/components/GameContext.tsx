@@ -17,21 +17,21 @@ type Action =
       };
     };
 type Dispatch = (action: Action) => void;
-type State = { players: Player[]; round: number; gameId: string };
-type GameProviderProps = { children: React.ReactNode };
+export type GameState = { players: Player[]; round: number; gameId: string };
+type GameProviderProps = { children: React.ReactNode; initialState?: GameState };
 
-const GameContext = React.createContext<{
-  state: State;
+export const GameContext = React.createContext<{
+  state: GameState;
   dispatch: Dispatch;
 } | undefined>(undefined);
 
-const INITIAL_STATE: State = {
+export const INITIAL_STATE: GameState = {
   players: [],
   round: 0,
   gameId: "",
 };
 
-function gameReducer(state: State, action: Action) {
+function gameReducer(state: GameState, action: Action) {
   switch (action.type) {
     case "startGame": {
       return {
@@ -103,12 +103,15 @@ function gameReducer(state: State, action: Action) {
   }
 }
 
-const GameProvider = ({ children }: GameProviderProps) => {
+const GameProvider = ({ children, initialState = INITIAL_STATE }: GameProviderProps) => {
   const [state, dispatch] = React.useReducer(
     gameReducer,
-    INITIAL_STATE,
+    initialState,
   );
-  const value = React.useMemo(() => ({ state, dispatch }), [state]);
+  const value = React.useMemo(
+    () => ({ state, dispatch }),
+    [state],
+  );
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
 };
 
