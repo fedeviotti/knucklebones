@@ -54,7 +54,7 @@ export const GameBoard = ({ onQuit }: Props) => {
         </Button>
         <Stack direction="column" spacing={4}>
           <PlayerBoard playerType="player" />
-          <Divider />
+          <Divider borderWidth="2px" width="50%" alignSelf="center" />
           <PlayerBoard playerType="opponent" />
         </Stack>
       </Stack>
