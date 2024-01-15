@@ -24,11 +24,11 @@ const Ranking = () => {
   const {
     isFetching: areWinnersFetching,
     data: winners,
-  } = api.game.getRanking.useQuery();
+  } = api.game.getRanking.useQuery(undefined, { refetchOnWindowFocus: false });
   const {
     isFetching: areLosersFetching,
     data: losers,
-  } = api.game.getNotWinnerRankingRaw.useQuery();
+  } = api.game.getNotWinnerRankingRaw.useQuery(undefined, { refetchOnWindowFocus: false });
 
   const isDataFetching = areWinnersFetching || areLosersFetching;
 

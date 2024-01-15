@@ -16,10 +16,11 @@ const History = () => {
     playerName: playerName as string,
   }, {
     enabled: !!playerName,
+    refetchOnWindowFocus: false,
   });
 
   const getContent = () => {
-    if (getGames.isLoading) {
+    if (getGames.isFetching) {
       return (
         <Stack spacing={12} px={[4, 8]}>
           <Skeleton height="60px" />

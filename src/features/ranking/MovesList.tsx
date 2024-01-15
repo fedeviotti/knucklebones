@@ -28,9 +28,9 @@ type Props = {
   gameId: string;
 };
 export const MovesList = ({ gameId }: Props) => {
-  const getMoves = api.game.getMovesByGame.useQuery({ gameId });
+  const getMoves = api.game.getMovesByGame.useQuery({ gameId }, { refetchOnWindowFocus: false });
 
-  if (getMoves.isLoading) {
+  if (getMoves.isFetching) {
     return (
       <Stack spacing={2} px={8}>
         <Skeleton height="24px" />
