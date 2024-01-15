@@ -15,7 +15,7 @@ type RankingInfo = {
   };
 };
 
-type NonWinnerInfo = {
+type LoserInfo = {
   winner: string;
   delta: bigint;
 };
@@ -26,13 +26,13 @@ const Ranking = () => {
     data: winners,
   } = api.game.getRanking.useQuery();
   const {
-    isLoading: isLoadingNotWinners,
-    data: notWinners,
+    isLoading: isLoadingLosers,
+    data: losers,
   } = api.game.getNotWinnerRankingRaw.useQuery();
 
   const fullRanking: RankingInfo[] = React.useMemo(
     () => {
-      if (isLoadingWinners || isLoadingNotWinners) {
+      if (isLoadingWinners || isLoadingLosers) {
         return [];
       }
       return ([
@@ -42,7 +42,7 @@ const Ranking = () => {
             delta: (e._sum.delta || 0) + e._count.winner,
           },
         })) as RankingInfo[],
-        ...(notWinners as NonWinnerInfo[])?.map(({ winner, delta }) => ({
+        ...(losers as LoserInfo[])?.map(({ winner, delta }) => ({
           _sum: {
             delta: Number(delta),
           },
@@ -65,11 +65,11 @@ const Ranking = () => {
       }, [] as RankingInfo[])
         .sort((a, b) => b._sum.delta - a._sum.delta));
     },
-    [isLoadingWinners, isLoadingNotWinners, winners, notWinners],
+    [isLoadingWinners, isLoadingLosers, winners, losers],
   );
 
   const getContent = () => {
-    if (isLoadingWinners || isLoadingNotWinners) {
+    if (isLoadingWinners || isLoadingLosers) {
       return (
         <Stack spacing={4} py={4}>
           <Skeleton height="53px" />
@@ -107,7 +107,7 @@ const Ranking = () => {
                   </Td>
                 </Tr>
               ))
-}
+            }
           </Tbody>
         </Table>
       </TableContainer>
