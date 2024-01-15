@@ -133,7 +133,7 @@ const Ranking = () => {
           bg="orange.50"
           opacity="0.95"
           overflow="auto"
-          height={["lg", "2xl"]}
+          height={["lg", "xl"]}
         >
           {getContent()}
         </Box>
