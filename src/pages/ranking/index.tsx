@@ -22,17 +22,19 @@ type LoserInfo = {
 
 const Ranking = () => {
   const {
-    isLoading: isLoadingWinners,
+    isFetching: areWinnersFetching,
     data: winners,
   } = api.game.getRanking.useQuery();
   const {
-    isLoading: isLoadingLosers,
+    isFetching: areLosersFetching,
     data: losers,
   } = api.game.getNotWinnerRankingRaw.useQuery();
 
+  const isDataFetching = areWinnersFetching || areLosersFetching;
+
   const fullRanking: RankingInfo[] = React.useMemo(
     () => {
-      if (isLoadingWinners || isLoadingLosers) {
+      if (isDataFetching) {
         return [];
       }
       return ([
@@ -65,11 +67,11 @@ const Ranking = () => {
       }, [] as RankingInfo[])
         .sort((a, b) => b._sum.delta - a._sum.delta));
     },
-    [isLoadingWinners, isLoadingLosers, winners, losers],
+    [isDataFetching, winners, losers],
   );
 
   const getContent = () => {
-    if (isLoadingWinners || isLoadingLosers) {
+    if (isDataFetching) {
       return (
         <Stack spacing={4} py={4}>
           <Skeleton height="53px" />
